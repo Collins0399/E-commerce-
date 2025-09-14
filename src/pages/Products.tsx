@@ -19,6 +19,8 @@ function Products() {
           <option value="All">All Categories</option>
           <option value="Utensils">Utensils</option>
           <option value="Clothes">Clothes</option>
+          <option value="Shoes">Shoes</option>
+          <option value="Bags">Bags</option>
         </select>
       </div>
     </div>

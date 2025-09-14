@@ -11,6 +11,9 @@ import Home from './pages/Home'
 import Products from "./pages/Products";
 import Clothes from "./pages/Clothes";
 import Utensils from "./pages/Utensils";
+import Contact from "./pages/Contact";
+import Shoes from "./pages/Shoes";
+import Bags from "./pages/Bags";
 // import Products from './pages/Products'
 // import Cart from './pages/Cart'
 // import Checkout from './pages/Checkout'
@@ -31,6 +34,9 @@ function App() {
           <Route path="/products/:category" element={<Products />} />
           <Route path="/products/clothes" element={<Clothes />} />
           <Route path="/products/utensils" element={<Utensils />} />
+          <Route path="/products/shoes" element={<Shoes />} />
+          <Route path="/products/bags" element={<Bags />} />
+          <Route path="/contact" element={<Contact />} />
           {/* <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
