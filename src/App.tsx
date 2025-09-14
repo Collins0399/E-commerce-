@@ -14,9 +14,13 @@ import Utensils from "./pages/Utensils";
 import Contact from "./pages/Contact";
 import Shoes from "./pages/Shoes";
 import Bags from "./pages/Bags";
+import NotFoundProducts from "./pages/NotFoundProduct"
+import { CartProvider } from "./context/CartContext"
 // import Products from './pages/Products'
-// import Cart from './pages/Cart'
-// import Checkout from './pages/Checkout'
+import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
+import Login from "./pages/Login"
+import Register from "./pages/Register"
 // import About from './pages/About'
 // import Terms from './pages/Terms'
 // import Privacy from './pages/Privacy'
@@ -25,6 +29,7 @@ import Bags from "./pages/Bags";
 
 function App() {
   return (
+    <CartProvider>
     <Router>
       <Navbar />
       <main className="content">
@@ -36,7 +41,12 @@ function App() {
           <Route path="/products/utensils" element={<Utensils />} />
           <Route path="/products/shoes" element={<Shoes />} />
           <Route path="/products/bags" element={<Bags />} />
+          <Route path="/products/notfound" element={<NotFoundProducts />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           {/* <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
@@ -49,6 +59,7 @@ function App() {
       </main>
        {/* <Footer /> */}
     </Router>
+    </CartProvider>
   )
 }
 

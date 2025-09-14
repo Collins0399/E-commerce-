@@ -1,44 +1,111 @@
 import { useState } from "react";
-import { FiSearch } from "react-icons/fi"; //icon for search field
+import { FiSearch } from "react-icons/fi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useCart } from "../context/CartContext"; // ✅ adjust path if needed
 
-// Sample clothes products
-const clothesData = [
-  { id: 1, name: "T-Shirt", price: 500, image: "t-shirt.jpg" },
-  { id: 2, name: "Jeans", price: 1000, image: "jeans.jpg" },
-  { id: 3, name: "Jacket", price: 1500, image: "jacket.jpg" },
+interface Product {
+  id: number;
+  name: string;
+  image: string;
+  price: number;
+  quantity: number;
+  description: string;
+}
+
+const clothesData: Product[] = [
+  {
+    id: 1,
+    name: "T-Shirt",
+    image: "https://via.placeholder.com/150",
+    price: 800,
+    quantity: 20,
+    description: "Comfortable cotton T-Shirt available in various colors.",
+  },
+  {
+    id: 2,
+    name: "Jeans",
+    image: "https://via.placeholder.com/150",
+    price: 1500,
+    quantity: 10,
+    description: "Stylish denim jeans for everyday wear.",
+  },
+  {
+    id: 3,
+    name: "Jacket",
+    image: "https://via.placeholder.com/150",
+    price: 2500,
+    quantity: 5,
+    description: "Warm and durable jacket suitable for winter.",
+  },
 ];
 
-function Clothes() {
+const Clothes: React.FC = () => {
+  const [cartQuantities, setCartQuantities] = useState<{ [key: number]: number }>({});
+  const { addToCart } = useCart();
 
+  const increaseQty = (id: number) => {
+    setCartQuantities((prev) => ({
+      ...prev,
+      [id]: (prev[id] || 1) + 1,
+    }));
+  };
+
+  const decreaseQty = (id: number) => {
+    setCartQuantities((prev) => ({
+      ...prev,
+      [id]: prev[id] && prev[id] > 1 ? prev[id] - 1 : 1,
+    }));
+  };
+
+  const handleAddToCart = (item: Product) => {
+    const qty = cartQuantities[item.id] || 1;
+    addToCart(item, qty);
+    toast.success(`${qty} ${item.name}(s) added to cart!`, {
+      position: "top-right",
+      autoClose: 2000,
+    });
+  };
 
   return (
     <div className="products-page">
       <h2>Clothes</h2>
 
+      {/* Search bar */}
       <div className="filters">
         <div className="search-container">
-          <input
-            type="text"
-            placeholder="Search..."
-          />
+          <input type="text" placeholder="Search..." />
           <FiSearch className="search-icon" />
         </div>
       </div>
 
-      {/* <div className="product-list">
-        {filteredProducts.length > 0 ? (
-          filteredProducts.map((product) => (
-            <div key={product.id} className="product-card">
-              <h3>{product.name}</h3>
-              <p>Category: Clothes</p>
+      {/* Product list */}
+      <div className="product-list">
+        {clothesData.map((item) => (
+          <div className="product-card" key={item.id}>
+            <img src={item.image} alt={item.name} />
+            <h3>{item.name}</h3>
+            <p>{item.description}</p>
+            <p>
+              Price: <strong>Ksh {item.price}</strong>
+            </p>
+            <p>Available: {item.quantity}</p>
+
+            {/* – / + controls */}
+            <div className="quantity-controls">
+              <button onClick={() => decreaseQty(item.id)}>-</button>
+              <span>{cartQuantities[item.id] || 1}</span>
+              <button onClick={() => increaseQty(item.id)}>+</button>
             </div>
-          ))
-        ) : (
-          <p>No clothes found.</p>
-        )}
-      </div> */}
+
+            <button onClick={() => handleAddToCart(item)}>Add to Cart</button>
+          </div>
+        ))}
+      </div>
+
+      <ToastContainer />
     </div>
   );
-}
+};
 
 export default Clothes;
