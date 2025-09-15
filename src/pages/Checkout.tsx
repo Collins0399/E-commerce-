@@ -17,31 +17,53 @@ const Checkout: React.FC = () => {
     0
   );
 
+  // const handlePlaceOrder = () => {
+  //   if (!currentUser) {
+  //     toast.info("Please login or register to place your order.", {
+  //       position: "top-right",
+  //       autoClose: 3000,
+  //     });
+  //     navigate("/login");
+  //     return;
+  //   }
+
+  //   if (cart.length === 0) {
+  //     toast.warning("Your cart is empty!", {
+  //       position: "top-right",
+  //       autoClose: 3000,
+  //     });
+  //     return;
+  //   }
+
+  //   toast.success(`Order placed successfully! Total: Ksh ${totalPrice}`, {
+  //     position: "top-right",
+  //     autoClose: 3000,
+  //   });
+
+  //   clearCart();
+  // };
   const handlePlaceOrder = () => {
-    if (!currentUser) {
-      toast.info("Please login or register to place your order.", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      navigate("/login");
-      return;
-    }
-
-    if (cart.length === 0) {
-      toast.warning("Your cart is empty!", {
-        position: "top-right",
-        autoClose: 3000,
-      });
-      return;
-    }
-
-    toast.success(`Order placed successfully! Total: Ksh ${totalPrice}`, {
+  if (!currentUser) {
+    toast.info("Please login or register to place your order.", {
       position: "top-right",
       autoClose: 3000,
     });
+    navigate("/login");
+    return;
+  }
 
-    clearCart();
-  };
+  if (cart.length === 0) {
+    toast.warning("Your cart is empty!", {
+      position: "top-right",
+      autoClose: 3000,
+    });
+    return;
+  }
+
+  // Redirect to Payment Page with order details
+  navigate("/payment", { state: { totalPrice, totalItems } });
+};
+
 
   return (
     <div className="checkout-page">

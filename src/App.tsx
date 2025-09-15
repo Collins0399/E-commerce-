@@ -21,6 +21,7 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import Login from "./pages/Login"
 import Register from "./pages/Register"
+import Payment from "./pages/Payment"
 // import About from './pages/About'
 // import Terms from './pages/Terms'
 // import Privacy from './pages/Privacy'
@@ -47,6 +48,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/payment" element={<Payment />} />
           {/* <Route path="/products" element={<Products />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
